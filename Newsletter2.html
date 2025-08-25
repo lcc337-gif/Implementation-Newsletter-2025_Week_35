@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Team Newsletter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Subtle Accents -->
+    <!-- Application Structure Plan: The SPA is now designed as a single, continuous page. Instead of using a navigation bar and thematic sections, all content is laid out in a linear flow, similar to a traditional newsletter document. This structure was chosen to simplify navigation and present all information on one screen, fulfilling the user's request for an "all on one page" experience. The interactive elements like the chart and collapsible sections are maintained to enhance data consumption within this linear flow. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: List of 13 "Go-Lives". Goal: Show project volume and allow focus on specific types. Viz/Presentation: Bulleted list. Interaction: None, direct presentation. Justification: This format is simpler and easier to scan, as requested by the user, and is a direct representation of the original source.
+        - Report Info: App release notes (GNX/HRTL fixes). Goal: Provide detailed technical info without cluttering the main view. Viz/Presentation: Collapsible accordion sections. Interaction: Click to expand/collapse. Justification: This keeps the linear interface clean while making detailed information accessible on demand.
+        - Report Info: Organizational change text and image. Goal: Clearly communicate team structure changes. Viz/Presentation: A dedicated card with text and an embedded image. Interaction: None needed, direct presentation is clearest.
+        - Report Info: All other text sections (Spotlight, Wins, Reminders). Goal: Inform and engage. Viz/Presentation: Styled cards with clear headings and icons. Interaction: None needed. Justification: Cards create a visually organized and scannable layout within the linear flow.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            color: #3f3c3a;
+        }
+        .card {
+            background-color: #fff;
+            border: 1px solid #f0ebe5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .tag {
+            background-color: #f0ebe5;
+            color: #7d7a78;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 space-y-12">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-[#3f3c3a] tracking-tight">Weekly Team Update</h1>
+            <p class="text-lg text-[#7d7a78] mt-2">Issue No. 2 | 2025 Week 35</p>
+            <p class="text-lg text-[#7d7a78] mt-2">A summary of our progress, achievements, and news.</p>
+        </header>
+
+        <main class="space-y-12">
+
+            <div>
+                <div class="card rounded-xl shadow-sm p-6 md:p-8">
+                    <h2 class="text-2xl font-bold mb-4 text-[#c5a07e]">⭐ Employee Spotlight</h2>
+                    <div class="text-lg space-y-2">
+                        <p>A huge welcome back to Taylor from her maternity leave! We are thrilled to have you back on the team.</p>
+                        <p class="font-semibold">Congratulations on the new baby!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold text-center mb-8">Project Milestones</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 card rounded-xl shadow-sm p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">Last Week's Go-Lives</h3>
+                        <p class="mb-6">An incredible week with 13 successful implementations. Here's a look at the teams' hard work:</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm pl-2">
+                            <li>BAM Keller</li>
+                            <li>Hometown Grill</li>
+                            <li>Pat's Pizza - Dover Foxcroft</li>
+                            <li>EASTSIDE AERIE 3260</li>
+                            <li>Main Paige</li>
+                            <li>Garlishious Deli</li>
+                            <li>Neighbors Barista</li>
+                            <li>Acapulco's Mexican Family Restaurant</li>
+                            <li>BAM Maineville OH USA272</li>
+                            <li>Oneida Lake Brew Haus</li>
+                            <li>GIFFORDS FARM AND FEED</li>
+                            <li>TOP SHOT GUNS</li>
+                            <li>Cafe Doro</li>
+                        </ul>
+                    </div>
+                    <div class="card rounded-xl shadow-sm p-6 md:p-8 flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">Team Wins</h3>
+                        <div class="space-y-6 flex-grow">
+                            <div class="p-4 rounded-lg bg-[#fdfbf7] border border-[#f0ebe5]">
+                                <h4 class="font-bold text-lg">Pat's Pizza Completion</h4>
+                                <p class="text-sm mt-1">A massive collaborative effort from Orders, Menu, Training, and Hardware to get this complex account over the finish line. A testament to our teamwork!</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-[#fdfbf7] border border-[#f0ebe5]">
+                                <h4 class="font-bold text-lg">Top Shot Guns Launch</h4>
+                                <p class="text-sm mt-1">This account went live in just 4 days! Huge congratulations to Bianca and the team for such a rapid and successful deployment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold text-center mb-8">Technical Updates & Releases</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card rounded-xl shadow-sm p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">🍴 Restaurant POS Delivery</h3>
+                        <p class="mb-4">A new version of Genius for Restaurants is now available across multiple platforms.</p>
+                        <div class="flex space-x-4 mb-6">
+                            <span class="tag text-xs font-semibold px-3 py-1 rounded-full">Android: 2.38.1971</span>
+                            <span class="tag text-xs font-semibold px-3 py-1 rounded-full">iOS: 2.38.44</span>
+                        </div>
+                        <div class="accordion-container space-y-2">
+                            <button onclick="toggleAccordion(this)" class="w-full text-left font-semibold text-lg flex justify-between items-center py-2"><span>Key Fixes</span><span>&#9660;</span></button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside text-sm space-y-1 pl-2 pt-2">
+                                    <li>GNX-6367 - Crash on special instructions being undefined.</li>
+                                    <li>GNX-6353 - Crash - Tapping Ticket Search View on Sunmi.</li>
+                                    <li>GNX-6100 - Action buttons become misaligned.</li>
+                                    <li>GNX-6074 - ELO: No margin of space around printer name.</li>
+                                    <li>GNX-6026 - Handheld 2.5: Unable to populate customer name.</li>
+                                    <li>GNX-6021 - Handheld 2.5: No indication of item duplication.</li>
+                                    <li>GNX-5991 - Handheld 2.5: UI issues with modals/spacing.</li>
+                                    <li>GNX-5218 - Handheld 2.5: Room/Table scroll wheel UI fix.</li>
+                                    <li>GNX-5612 - Sort subitems as ingredients.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card rounded-xl shadow-sm p-6 md:p-8">
+                        <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">🛍️ Heartland Retail Release</h3>
+                        <p class="mb-4">Version 2025.08.260 is scheduled for release on Tuesday, August 26th, 2025.</p>
+                        <div class="accordion-container space-y-2">
+                            <button onclick="toggleAccordion(this)" class="w-full text-left font-semibold text-lg flex justify-between items-center py-2"><span>Upcoming Enhancements</span><span>&#9660;</span></button>
+                            <div class="accordion-content">
+                                <ul class="list-disc list-inside text-sm space-y-1 pl-2 pt-2">
+                                    <li>HRTL-14716 Add Color Options to Quick Item Buttons</li>
+                                    <li>HRTL-14968 Add ‘Top Performers’ Data Grouping to Dashboard</li>
+                                    <li>HRTL-15220 Improve BigCommerce Gift Card Errors</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                 <h2 class="text-3xl font-bold text-center mb-8">People & Culture</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card rounded-xl shadow-sm p-6 md:p-8 lg:col-span-2">
+                        <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">Organizational Change</h3>
+                        <p class="mb-4">Last week we announced a new org chart. We are sad to see Brian, Gabrielle, Eddie, and Warren move to a new department, but they will always be part of the Implementation team in our hearts. We wish them all the best!</p>
+                        <p class="mb-6">We would also like to officially welcome Paula Robinson to the team! More details will be shared as we get to know Paula and her team.</p>
+                        <img src="https://github.com/lcc337-gif/Implementation-Newsletter-2025_Week_35/blob/main/OrgChart.html" alt="Organizational Chart" class="rounded-lg border border-[#f0ebe5] w-full">
+                    </div>
+                    <div class="space-y-8 flex flex-col">
+                        <div class="card rounded-xl shadow-sm p-6 md:p-8 flex-grow">
+                            <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">Birthdays & Anniversaries</h3>
+                            <p>Happy Birthday to Rodrigo Gabriel III Mortiz on August 31st!</p>
+                        </div>
+                        <div class="card rounded-xl shadow-sm p-6 md:p-8 flex-grow">
+                            <h3 class="text-2xl font-bold mb-4 text-[#c5a07e]">Words of Encouragement</h3>
+                            <blockquote class="text-lg italic border-l-4 border-[#c5a07e] pl-4">
+                                "Leadership is a choice that you make not a place where you sit. You can make a difference no matter where you are."
+                            </blockquote>
+                            <p class="text-right mt-4 text-sm">- Shared by Nick Coombs, from "The 360 Leader"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="text-3xl font-bold text-center mb-8">Important Reminders</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card rounded-xl shadow-sm p-6">
+                        <h3 class="text-xl font-bold mb-3 text-[#c5a07e]">Did You Know?</h3>
+                        <p class="text-sm">We are sunsetting onsite installs by NITP but will continue to support the remaining projects. Customers can still use NITP as a 3rd party vendor. Please contact the Hardware team for more info.</p>
+                    </div>
+                    <div class="card rounded-xl shadow-sm p-6">
+                        <h3 class="text-xl font-bold mb-3 text-[#c5a07e]">⭐ Key Dates</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Money Laundering Training needs to be completed by end of month.</li>
+                            <li>Microsoft switchover is in Early Sept</li>
+                            <li>4 Talks are due on 9/30</li>
+                        </ul>
+                    </div>
+                     <div class="card rounded-xl shadow-sm p-6">
+                        <h3 class="text-xl font-bold mb-3 text-[#c5a07e]">Orders Team Updates</h3>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            <li>Reactivating 10.2 iPads with a new stand.</li>
+                             <li>Salesforce Phase 1 rebranding on Sept 2nd.</li>
+                            <li>Epson T88VI-I (C31CE94731) is discontinued.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('span:last-child');
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+
+</body>
+</html>
